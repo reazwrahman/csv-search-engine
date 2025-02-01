@@ -1,18 +1,24 @@
 package utility;
 
 import bu.cs622.csv.search.engine.utility.FileHandler;
+import com.opencsv.CSVReader;
+import com.opencsv.exceptions.CsvException;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.Mockito.*;
 
 /**
  * Name: Reaz W. Rahman
@@ -52,6 +58,7 @@ public class FileHandlerTest {
         deleteFile(tempFile);
     }
 
+    // ---------------- helper methods ------------ //
     public static void deleteFile(String fileName) {
         File file = new File(fileName);
         if (file.exists()) {
@@ -73,7 +80,57 @@ public class FileHandlerTest {
     }
 
     @Test
-    public void testCopyFileWithHeader() {
+    public void testRecreateFileWithException() throws IOException {
+        File mockFile = Mockito.mock(File.class); // mocking the Java.io.File
+
+        // Mock the behavior of the File methods
+        when(mockFile.exists()).thenReturn(true);
+        when(mockFile.delete()).thenReturn(true);
+        when(mockFile.createNewFile()).thenThrow(new IOException("Failed to create new file"));
+
+        // Use a spy to partially mock the FileHandler class
+        FileHandler fileHandlerSpy = Mockito.spy(new FileHandler());
+        doReturn(mockFile).when(fileHandlerSpy).getFileObject(anyString());
+
+        // Assert that an IOException is thrown
+        assertThrows(IOException.class, () -> fileHandlerSpy.recreateFile("test123.txt"));
+
+    }
+
+    @Test
+    public void testReadLinesWithException() throws IOException {
+        BufferedReader mockReader = Mockito.mock(BufferedReader.class); // mocking the Java.io.BufferedReader
+
+        // Mock the behavior
+        when(mockReader.readLine()).thenThrow(new IOException("Failed to read file"));
+
+        // Use a spy to partially mock the FileHandler class
+        FileHandler fileHandlerSpy = Mockito.spy(new FileHandler());
+        doReturn(mockReader).when(fileHandlerSpy).getBufferedReader(anyString());
+
+        // Assert that an IOException is thrown
+        assertThrows(IOException.class, () -> fileHandlerSpy.readLines("test123.txt"));
+
+    }
+
+    @Test
+    public void testReadCsvWithException() throws CsvException, IOException {
+        CSVReader mockReader = Mockito.mock(CSVReader.class);
+
+        // Mock the behavior
+        when(mockReader.readAll()).thenThrow(new CsvException("Failed to read file"));
+
+        // Use a spy to partially mock the FileHandler class
+        FileHandler fileHandlerSpy = Mockito.spy(new FileHandler());
+        doReturn(mockReader).when(fileHandlerSpy).getCsvReader(anyString());
+
+        // Assert that an RuntimeException is thrown
+        assertThrows(RuntimeException.class, () -> fileHandlerSpy.readCsv("test123.txt"));
+
+    }
+
+    @Test
+    public void testCopyFileWithHeader() throws IOException {
         deleteFile(outputFile);
         assertDoesNotThrow(() -> m_fileHandler.copyFile(fullInputPath, outputFile, false));
 
@@ -92,7 +149,7 @@ public class FileHandlerTest {
     }
 
     @Test
-    public void testCopyFileWithoutHeader() {
+    public void testCopyFileWithoutHeader() throws IOException {
         deleteFile(outputFile);
 
         assertDoesNotThrow(() -> m_fileHandler.copyFile(fullInputPath, outputFile, true));
@@ -107,7 +164,22 @@ public class FileHandlerTest {
     }
 
     @Test
-    public void testWriteContent() {
+    public void testWriteContent() throws IOException {
+        BufferedWriter mockWriter = Mockito.mock(BufferedWriter.class);
+
+        // Mock the mockWriter
+        doThrow(new IOException("Failed to write to file")).when(mockWriter).write(anyString());
+
+        // Use a spy to partially mock the FileHandler class
+        FileHandler fileHandlerSpy = Mockito.spy(new FileHandler());
+        doReturn(mockWriter).when(fileHandlerSpy).getBufferedWriter(anyString(), anyBoolean());
+
+        // Assert that an IOException is thrown
+        assertThrows(IOException.class, () -> fileHandlerSpy.writeContent("test123.txt", "hello_world"));
+    }
+
+    @Test
+    public void testWriteContentWithException() throws IOException {
         deleteFile(tempFile);
         String testData = "sample test data";
         String tempFile = "temp.txt";

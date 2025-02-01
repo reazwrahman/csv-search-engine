@@ -3,7 +3,6 @@ package bu.cs622.csv.search.engine;
 import bu.cs622.csv.search.engine.utility.Configs;
 import bu.cs622.csv.search.engine.utility.FileHandler;
 
-import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.List;
 

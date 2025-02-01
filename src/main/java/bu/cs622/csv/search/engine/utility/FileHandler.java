@@ -39,7 +39,7 @@ public class FileHandler {
     // Create a new file or overwrite an existing file
     public void recreateFile(String fileName) throws IOException {
         try {
-            File file = new File(fileName);
+            File file = getFileObject(fileName);
             // Delete the file if it exists
             if (file.exists()) {
                 file.delete();
@@ -47,6 +47,7 @@ public class FileHandler {
             file.createNewFile();
         } catch (IOException e) {
             e.printStackTrace();
+            throw new IOException("FileHandler::recreateFile failed to create file");
         }
     }
 
@@ -66,21 +67,22 @@ public class FileHandler {
                 }
             }
         } catch (Exception e) {
-            throw new RuntimeException(e.getCause());
+            e.printStackTrace();
+            throw new RuntimeException("FileHandler::copyFile failed to copy, exception: " + e.getCause());
         }
     }
 
     // Read all lines from a file, not recommended for large files
     @Deprecated
-    public List<String> readLines(String filePath) {
+    public List<String> readLines(String filePath) throws IOException {
         List<String> lines = new ArrayList<>();
-        try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
+        try (BufferedReader reader = getBufferedReader(filePath)) {
             String line;
             while ((line = reader.readLine()) != null) {
                 lines.add(line);
             }
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new IOException(e);
         }
         return lines;
     }
@@ -88,7 +90,7 @@ public class FileHandler {
     // Read all CSV data from a file, not recommended to use for large files
     @Deprecated
     public List<String[]> readCsv(String filePath) {
-        try (CSVReader reader = new CSVReader(new FileReader(filePath))) {
+        try (CSVReader reader = getCsvReader(filePath)) {
             return reader.readAll();  // Reads entire CSV with multi-line support
         } catch (IOException | CsvException e) {
             throw new RuntimeException("Error reading CSV", e);
@@ -96,12 +98,33 @@ public class FileHandler {
     }
 
     // Write content to a file
-    public void writeContent(String filePath, String content) {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, true))) {
+    public void writeContent(String filePath, String content) throws IOException {
+        try (BufferedWriter writer = getBufferedWriter(filePath, true)) {
             writer.write(content);
             writer.newLine();
         } catch (IOException e) {
             e.printStackTrace();
+            throw new IOException(e.getCause());
         }
+    }
+
+    /* Method to create a File object, refactored to make the class testable with mocks */
+    public File getFileObject(String fileName) {
+        return new File(fileName);
+    }
+
+    /* Method to create a BufferedReader object, refactored to make the class testable with mocks */
+    public BufferedReader getBufferedReader(String filePath) throws FileNotFoundException {
+        return new BufferedReader(new FileReader(filePath));
+    }
+
+    /* Method to create a BufferedWriter object, refactored to make the class testable with mocks */
+    public BufferedWriter getBufferedWriter(String filePath, boolean shouldAppend) throws IOException {
+        return new BufferedWriter(new FileWriter(filePath, shouldAppend));
+    }
+
+    /* Method to create a CSVReader object, refactored to make the class testable with mocks */
+    public CSVReader getCsvReader(String filePath) throws IOException {
+        return new CSVReader(new FileReader(filePath));
     }
 }

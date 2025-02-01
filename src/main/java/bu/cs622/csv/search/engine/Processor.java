@@ -82,6 +82,7 @@ public class Processor {
         // Check if the word exists in the StringBuilder
         if (matcher.find()) {
             m_matchCount++;
+            System.out.println("Found: " + wordToFind);
             System.out.println("Match count: " + m_matchCount);
             System.out.println("funds_raised_amount: " + row[Configs.FUNDS_RAISED_AMOUNT_INDEX]);
             System.out.println("close_date: " + row[Configs.CLOSE_DATE_INDEX]);
