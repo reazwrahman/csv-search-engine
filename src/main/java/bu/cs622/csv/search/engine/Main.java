@@ -1,6 +1,6 @@
-package bu.cs622;
+package bu.cs622.csv.search.engine;
 
-import bu.cs622.utility.Configs;
+import bu.cs622.csv.search.engine.utility.Configs;
 
 import java.io.IOException;
 
@@ -10,7 +10,7 @@ public class Main {
         merger.mergeInputFiles();
 
         Processor processor = new Processor();
-        processor.search(Configs.OUTPUT_FILE, "cricket", false);
+        processor.search(Configs.OUTPUT_FILE, "hello world", false);
 
     }
 }

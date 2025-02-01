@@ -1,6 +1,6 @@
-package bu.cs622;
+package bu.cs622.csv.search.engine;
 
-import bu.cs622.utility.Configs;
+import bu.cs622.csv.search.engine.utility.Configs;
 import com.opencsv.CSVReader;
 import com.opencsv.exceptions.CsvException;
 
@@ -78,7 +78,6 @@ public class Processor {
 
         // Create a matcher to find the word in the StringBuilder
         Matcher matcher = pattern.matcher(fullString.toString());
-        System.out.println(fullString.toString());
 
         // Check if the word exists in the StringBuilder
         if (matcher.find()) {

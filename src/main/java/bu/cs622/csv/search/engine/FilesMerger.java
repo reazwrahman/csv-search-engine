@@ -1,7 +1,7 @@
-package bu.cs622;
+package bu.cs622.csv.search.engine;
 
-import bu.cs622.utility.Configs;
-import bu.cs622.utility.FileHandler;
+import bu.cs622.csv.search.engine.utility.Configs;
+import bu.cs622.csv.search.engine.utility.FileHandler;
 
 import java.io.IOException;
 import java.nio.file.Paths;

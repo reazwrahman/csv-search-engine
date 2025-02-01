@@ -1,6 +1,6 @@
-package bu.cs622.utility;
+package bu.cs622.csv.search.engine.utility;
 
-import bu.cs622.Main;
+import bu.cs622.csv.search.engine.Main;
 
 import java.net.URL;
 import java.nio.file.Paths;

@@ -1,4 +1,4 @@
-import bu.cs622.utility.FileHandler;
+import bu.cs622.csv.search.engine.utility.FileHandler;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;

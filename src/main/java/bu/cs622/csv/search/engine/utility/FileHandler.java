@@ -1,4 +1,4 @@
-package bu.cs622.utility;
+package bu.cs622.csv.search.engine.utility;
 
 import com.opencsv.CSVReader;
 import com.opencsv.exceptions.CsvException;
