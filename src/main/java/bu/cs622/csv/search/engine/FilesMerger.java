@@ -18,21 +18,21 @@ import java.util.List;
 
 
 public class FilesMerger {
-    private final FileHandler m_fileHandler;
 
-    public FilesMerger() {
-        m_fileHandler = new FileHandler();
+    protected FileHandler getFileHandler() {
+        return new FileHandler();
     }
 
     // Merge all input files into a single output file
     public void mergeInputFiles() throws FileHandlingException {
+        FileHandler fileHandler = getFileHandler();
         try {
-            m_fileHandler.recreateFile(Configs.OUTPUT_FILE);
-            m_fileHandler.writeContent(Configs.OUTPUT_FILE, Configs.HEADERS); // write headers once, ignore after
-            List<String> inputFiles = m_fileHandler.getFilesList(Configs.INPUT_PATH);
+            fileHandler.recreateFile(Configs.OUTPUT_FILE);
+            fileHandler.writeContent(Configs.OUTPUT_FILE, Configs.HEADERS); // write headers once, ignore after
+            List<String> inputFiles = fileHandler.getFilesList(Configs.INPUT_PATH);
             for (String file : inputFiles) {
                 String fullInputPath = Paths.get(Configs.INPUT_PATH, file).toString();
-                m_fileHandler.copyFile(fullInputPath, Configs.OUTPUT_FILE, true);
+                fileHandler.copyFile(fullInputPath, Configs.OUTPUT_FILE, true);
             }
         } catch (IOException | RuntimeException ex){
             throw new FileHandlingException(ex.getMessage());
