@@ -2,7 +2,12 @@ import bu.cs622.csv.search.engine.Processor;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.nio.file.Paths;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class ProcessorTest {
     private static String mockFile;
@@ -45,6 +50,25 @@ public class ProcessorTest {
         keyword = "TECH";
         result = m_processor.search(mockFilePath, keyword, true);
         assert (result == 0);
+    }
+
+    @Test
+    public void testCheckLengthThrowsException() throws NoSuchMethodException {
+        // Access the private method using reflection
+        Method checkLengthMethod = Processor.class.getDeclaredMethod("checkLength", String[].class);
+        checkLengthMethod.setAccessible(true);
+
+        String[] invalidRow = new String[]{"data1", "data2"};
+
+        RuntimeException thrown = assertThrows(RuntimeException.class, () -> {
+            try {
+                checkLengthMethod.invoke(m_processor, (Object) invalidRow);
+            } catch (InvocationTargetException e) {
+                throw (RuntimeException) e.getCause(); // casts the thrown exception into a runtime exception
+            }
+        });
+
+        assertEquals("OutputProcessor::checkLength invalid length for row, expected: 26 Found: 2 , data: [data1, data2]", thrown.getMessage());
     }
 
 }

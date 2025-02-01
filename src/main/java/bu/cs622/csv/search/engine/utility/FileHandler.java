@@ -46,13 +46,12 @@ public class FileHandler {
             }
             file.createNewFile();
         } catch (IOException e) {
-            e.printStackTrace();
             throw new IOException("FileHandler::recreateFile failed to create file");
         }
     }
 
     // Copy the content of one file to another
-    public void copyFile(String inputFilePath, String outputFilePath, boolean ignoreHeader) throws Exception {
+    public void copyFile(String inputFilePath, String outputFilePath, boolean ignoreHeader) throws RuntimeException {
         try (BufferedReader reader = new BufferedReader(new FileReader(inputFilePath));
              BufferedWriter writer = new BufferedWriter(new FileWriter(outputFilePath, true))) {
 
@@ -66,8 +65,7 @@ public class FileHandler {
                     writer.newLine();
                 }
             }
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (IOException e) {
             throw new RuntimeException("FileHandler::copyFile failed to copy, exception: " + e.getCause());
         }
     }
@@ -103,7 +101,6 @@ public class FileHandler {
             writer.write(content);
             writer.newLine();
         } catch (IOException e) {
-            e.printStackTrace();
             throw new IOException(e.getCause());
         }
     }

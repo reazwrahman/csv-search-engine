@@ -2,7 +2,9 @@ package bu.cs622.csv.search.engine;
 
 import bu.cs622.csv.search.engine.utility.Configs;
 import bu.cs622.csv.search.engine.utility.FileHandler;
+import bu.cs622.csv.search.engine.utility.FileHandlingException;
 
+import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.List;
 
@@ -23,13 +25,17 @@ public class FilesMerger {
     }
 
     // Merge all input files into a single output file
-    public void mergeInputFiles() throws Exception {
-        m_fileHandler.recreateFile(Configs.OUTPUT_FILE);
-        m_fileHandler.writeContent(Configs.OUTPUT_FILE, Configs.HEADERS); // write headers once, ignore after
-        List<String> inputFiles = m_fileHandler.getFilesList(Configs.INPUT_PATH);
-        for (String file : inputFiles) {
-            String fullInputPath = Paths.get(Configs.INPUT_PATH, file).toString();
-            m_fileHandler.copyFile(fullInputPath, Configs.OUTPUT_FILE, true);
+    public void mergeInputFiles() throws FileHandlingException {
+        try {
+            m_fileHandler.recreateFile(Configs.OUTPUT_FILE);
+            m_fileHandler.writeContent(Configs.OUTPUT_FILE, Configs.HEADERS); // write headers once, ignore after
+            List<String> inputFiles = m_fileHandler.getFilesList(Configs.INPUT_PATH);
+            for (String file : inputFiles) {
+                String fullInputPath = Paths.get(Configs.INPUT_PATH, file).toString();
+                m_fileHandler.copyFile(fullInputPath, Configs.OUTPUT_FILE, true);
+            }
+        } catch (IOException | RuntimeException ex){
+            throw new FileHandlingException(ex.getMessage());
         }
     }
 }
