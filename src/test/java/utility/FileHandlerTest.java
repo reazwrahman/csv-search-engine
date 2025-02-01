@@ -52,19 +52,6 @@ public class FileHandlerTest {
         deleteFile(tempFile);
     }
 
-    @AfterAll
-    public static void cleanup() {
-        deleteFile(outputFile);
-        deleteFile(tempFile);
-    }
-
-    // ---------------- helper methods ------------ //
-    public static void deleteFile(String fileName) {
-        File file = new File(fileName);
-        if (file.exists()) {
-            file.delete();
-        }
-    }
 
     @Test
     public void testGetFilesList() {
@@ -198,5 +185,20 @@ public class FileHandlerTest {
         assert (data.get(1).length == 2);
         assert (data.get(1)[0].equals("hello"));
         assert (data.get(1)[1].equals("world"));
+    }
+
+
+    @AfterAll
+    public static void cleanup() {
+        deleteFile(outputFile);
+        deleteFile(tempFile);
+    }
+
+    // ---------------- helper methods ------------ //
+    public static void deleteFile(String fileName) {
+        File file = new File(fileName);
+        if (file.exists()) {
+            file.delete();
+        }
     }
 }

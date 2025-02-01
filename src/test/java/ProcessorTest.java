@@ -30,6 +30,10 @@ public class ProcessorTest {
         keyword = "lifestyle";
         result = m_processor.search(mockFilePath, keyword, false);
         assert (result == 1);
+
+        keyword = "reaz";
+        result = m_processor.search(mockFilePath, keyword, false);
+        assert (result == 0);
     }
 
     @Test
