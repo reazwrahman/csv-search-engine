@@ -2,7 +2,7 @@
 
 0) finish this readme
 1) add docblocks [done]
-2) git repo
+2) git repo [done]
 3) add some unit tests , filehandler ? [done]
 
 

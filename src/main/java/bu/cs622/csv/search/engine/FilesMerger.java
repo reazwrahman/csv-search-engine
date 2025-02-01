@@ -24,7 +24,7 @@ public class FilesMerger {
     }
 
     // Merge all input files into a single output file
-    public void mergeInputFiles() throws IOException {
+    public void mergeInputFiles() throws Exception {
         m_fileHandler.recreateFile(Configs.OUTPUT_FILE);
         m_fileHandler.writeContent(Configs.OUTPUT_FILE, Configs.HEADERS); // write headers once, ignore after
         List<String> inputFiles = m_fileHandler.getFilesList(Configs.INPUT_PATH);

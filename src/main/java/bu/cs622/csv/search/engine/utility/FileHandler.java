@@ -38,15 +38,12 @@ public class FileHandler {
 
     // Create a new file or overwrite an existing file
     public void recreateFile(String fileName) throws IOException {
-        File file = new File(fileName);
-
-        // Delete the file if it exists
-        if (file.exists()) {
-            file.delete();
-        }
-
-        // Create a new empty file
         try {
+            File file = new File(fileName);
+            // Delete the file if it exists
+            if (file.exists()) {
+                file.delete();
+            }
             file.createNewFile();
         } catch (IOException e) {
             e.printStackTrace();
@@ -54,7 +51,7 @@ public class FileHandler {
     }
 
     // Copy the content of one file to another
-    public void copyFile(String inputFilePath, String outputFilePath, boolean ignoreHeader) {
+    public void copyFile(String inputFilePath, String outputFilePath, boolean ignoreHeader) throws Exception {
         try (BufferedReader reader = new BufferedReader(new FileReader(inputFilePath));
              BufferedWriter writer = new BufferedWriter(new FileWriter(outputFilePath, true))) {
 
@@ -68,8 +65,8 @@ public class FileHandler {
                     writer.newLine();
                 }
             }
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (Exception e) {
+            throw new RuntimeException(e.getCause());
         }
     }
 

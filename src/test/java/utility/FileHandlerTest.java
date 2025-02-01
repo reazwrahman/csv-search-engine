@@ -6,10 +6,13 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 /**
  * Name: Reaz W. Rahman
@@ -80,6 +83,11 @@ public class FileHandlerTest {
 
         assert (inputLines.size() == 2);
         assert (inputLines.equals(outputLines));
+
+        assertThrows(Exception.class, () -> {
+            // Code that is expected to throw the exception
+            m_fileHandler.copyFile("java123", "java456", true);
+        });
 
     }
 

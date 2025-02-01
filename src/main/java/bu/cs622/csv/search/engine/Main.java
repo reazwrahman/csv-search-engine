@@ -5,7 +5,7 @@ import bu.cs622.csv.search.engine.utility.Configs;
 import java.io.IOException;
 
 public class Main {
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws Exception {
         FilesMerger merger = new FilesMerger();
         merger.mergeInputFiles();
 
