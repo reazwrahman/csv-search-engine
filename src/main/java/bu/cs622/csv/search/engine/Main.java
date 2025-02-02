@@ -13,7 +13,7 @@ public class Main {
 
             // process output file
             Processor processor = new Processor();
-            processor.search(Configs.OUTPUT_FILE, "weight lifting", false);
+            processor.search(Configs.OUTPUT_FILE, "united states", false);
 
         } catch (FileHandlingException ex) {
             ex.printStackTrace();
