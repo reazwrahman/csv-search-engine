@@ -21,7 +21,7 @@ import static org.mockito.Mockito.*;
 /**
  * Name: Reaz W. Rahman
  * Course: CS 622: Advanced Programming Techniques
- * Date: 1/31/2025
+ * Date: 2/01/2025
  * File name: FilesMerger.java
  * Description: This class tests the m_fileHandler class.
  */

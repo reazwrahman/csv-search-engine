@@ -13,16 +13,10 @@ public class Main {
 
             // process output file
             Processor processor = new Processor();
-            processor.search(Configs.OUTPUT_FILE, "deepseek", false);
+            processor.search(Configs.OUTPUT_FILE, "weight lifting", false);
 
         } catch (FileHandlingException ex) {
             ex.printStackTrace();
-            File file = new File(Configs.OUTPUT_FILE);
-            if (file.exists()) {
-                file.delete();
-            }
-        } catch (Exception ex) {
-            ex.printStackTrace();
         }
-    } // end of main
-} // end of class
+    }
+}

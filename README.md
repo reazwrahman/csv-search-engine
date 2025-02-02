@@ -30,5 +30,5 @@ for specific keywords.
 
 1) FileHandlerTest.java: Unit tests for FileHandler.java
 2) ProcessorTest.java: Unit tests for Processor.java
-
+3) FilesMergerTest.java: Unit tests for FilesMerger.java
       
