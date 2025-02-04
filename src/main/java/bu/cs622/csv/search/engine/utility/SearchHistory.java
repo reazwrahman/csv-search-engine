@@ -14,7 +14,7 @@ import java.util.Map;
 
 public class SearchHistory {
 
-    public static Map<String, Tuple> m_searchHistory = new HashMap<>();
+    private static Map<String, Tuple> m_searchHistory = new HashMap<>();
 
     // Insert a record in the search history
     public static void insertRecord(String keyword){

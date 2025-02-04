@@ -9,7 +9,6 @@ package bu.cs622.csv.search.engine.utility;
  *              reusable across the project.
  */
 
-
 public class Tuple <S, U> {
     public S frequency;
     public U lastSearched;

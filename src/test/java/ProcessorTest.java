@@ -1,4 +1,5 @@
 import bu.cs622.csv.search.engine.Processor;
+import bu.cs622.csv.search.engine.utility.SearchHistory;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -69,6 +70,20 @@ public class ProcessorTest {
         });
 
         assertEquals("OutputProcessor::checkLength invalid length for row, expected: 26 Found: 2 , data: [data1, data2]", thrown.getMessage());
+    }
+
+    @Test
+    public void testSearchHistory() {
+        String keyword = "Tech";
+        m_processor.search(mockFilePath, keyword, false);
+        assert((int)SearchHistory.getSearchHistory().get(keyword).frequency == 1);
+
+        m_processor.search(mockFilePath, keyword, false);
+        assert((int)SearchHistory.getSearchHistory().get(keyword).frequency == 2);
+
+        m_processor.search(mockFilePath, keyword, false);
+        assert((int)SearchHistory.getSearchHistory().get(keyword).frequency == 3);
+
     }
 
 }

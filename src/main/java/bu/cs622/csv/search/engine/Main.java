@@ -17,9 +17,7 @@ public class Main {
             while (true) {
                 Scanner scanner = new Scanner(System.in);
                 System.out.print("Enter a search term: ");
-                String keyword = scanner.nextLine();
-
-                processor.search(Configs.OUTPUT_FILE, keyword, false);
+                processor.search(Configs.OUTPUT_FILE, scanner.nextLine(), false);
             }
 
         } catch (FileHandlingException ex) {
