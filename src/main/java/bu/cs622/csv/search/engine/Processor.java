@@ -38,19 +38,6 @@ public class Processor {
             System.out.println("No match found for: " + keyword);
         }
         SearchHistory.printHistory();
-
-        // put it to map
-//        int frequency = 1;
-//        if (m_searchHistory.containsKey(keyword)) {
-//            frequency = (int) m_searchHistory.get(keyword).frequency;
-//        }
-//
-//        Tuple record = new Tuple(frequency, Instant.now());
-//        m_searchHistory.put(keyword, record);
-//        m_searchHistory.forEach((key, value) -> System.out.println("search term: " + key + ", frequency: " + value.frequency
-//                + ", last searched: " + value.lastSearched.toString()));
-//        System.out.println("-----------------------------------");
-        // -------------- //
         return m_matchCount;
     }
 
