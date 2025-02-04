@@ -1,6 +1,7 @@
 package bu.cs622.csv.search.engine;
 
 import bu.cs622.csv.search.engine.utility.Configs;
+import bu.cs622.csv.search.engine.utility.SearchHistory;
 import bu.cs622.csv.search.engine.utility.Tuple;
 import com.opencsv.CSVReader;
 import com.opencsv.exceptions.CsvException;
@@ -30,19 +31,25 @@ public class Processor {
     // Search for a keyword in the output file
     public int search(String outputFile, String keyword, boolean isCaseSensitive) {
         m_matchCount = 0;
+        SearchHistory.insertRecord(keyword);
 
         processCsv(outputFile, keyword, isCaseSensitive);
         if (m_matchCount == 0) {
             System.out.println("No match found for: " + keyword);
         }
+        SearchHistory.printHistory();
 
         // put it to map
-        int frequency = m_searchHistory.containsKey(keyword) ? m_searchHistory.get(keyword).frequency + 1 : 1;
-        Tuple record = new Tuple(frequency, Instant.now());
-        m_searchHistory.put(keyword, record);
-        m_searchHistory.forEach((key, value) -> System.out.println("search term: " + key + ", frequency: " + value.frequency
-                + ", last searched: " + value.lastSearched.toString()));
-        System.out.println("-----------------------------------");
+//        int frequency = 1;
+//        if (m_searchHistory.containsKey(keyword)) {
+//            frequency = (int) m_searchHistory.get(keyword).frequency;
+//        }
+//
+//        Tuple record = new Tuple(frequency, Instant.now());
+//        m_searchHistory.put(keyword, record);
+//        m_searchHistory.forEach((key, value) -> System.out.println("search term: " + key + ", frequency: " + value.frequency
+//                + ", last searched: " + value.lastSearched.toString()));
+//        System.out.println("-----------------------------------");
         // -------------- //
         return m_matchCount;
     }
