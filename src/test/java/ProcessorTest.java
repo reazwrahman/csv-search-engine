@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.nio.file.Paths;
+import java.time.Instant;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -74,6 +75,7 @@ public class ProcessorTest {
 
     @Test
     public void testSearchHistory() {
+        Instant now = Instant.now();
         String keyword = "Tech";
         m_processor.search(mockFilePath, keyword, false);
         assert((int)SearchHistory.getSearchHistory().get(keyword).frequency == 1);
@@ -83,6 +85,9 @@ public class ProcessorTest {
 
         m_processor.search(mockFilePath, keyword, false);
         assert((int)SearchHistory.getSearchHistory().get(keyword).frequency == 3);
+
+        Instant lastSearched = (Instant)SearchHistory.getSearchHistory().get(keyword).lastSearched;
+        assert(lastSearched.isAfter(now));
 
     }
 
