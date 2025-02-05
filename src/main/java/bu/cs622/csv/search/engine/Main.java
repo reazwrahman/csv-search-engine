@@ -4,7 +4,6 @@ import bu.cs622.csv.search.engine.utility.Configs;
 import bu.cs622.csv.search.engine.utility.FileHandlingException;
 import bu.cs622.csv.search.engine.utility.SearchHistory;
 
-import java.io.File;
 import java.util.Scanner;
 
 public class Main {
