@@ -8,8 +8,7 @@ import java.lang.reflect.Method;
 import java.nio.file.Paths;
 import java.time.Instant;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class SearchHistoryTest {
 
@@ -28,6 +27,8 @@ public class SearchHistoryTest {
 
         Instant lastSearched = (Instant)SearchHistory.getSearchHistory().get(keyword).lastSearched;
         assert(lastSearched.isAfter(now));
+
+        assertDoesNotThrow(SearchHistory::printHistory);
 
     }
 
