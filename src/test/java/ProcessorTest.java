@@ -72,23 +72,4 @@ public class ProcessorTest {
 
         assertEquals("OutputProcessor::checkLength invalid length for row, expected: 26 Found: 2 , data: [data1, data2]", thrown.getMessage());
     }
-
-    @Test
-    public void testSearchHistory() {
-        Instant now = Instant.now();
-        String keyword = "Tech";
-        m_processor.search(mockFilePath, keyword, false);
-        assert((int)SearchHistory.getSearchHistory().get(keyword).frequency == 1);
-
-        m_processor.search(mockFilePath, keyword, false);
-        assert((int)SearchHistory.getSearchHistory().get(keyword).frequency == 2);
-
-        m_processor.search(mockFilePath, keyword, false);
-        assert((int)SearchHistory.getSearchHistory().get(keyword).frequency == 3);
-
-        Instant lastSearched = (Instant)SearchHistory.getSearchHistory().get(keyword).lastSearched;
-        assert(lastSearched.isAfter(now));
-
-    }
-
 }

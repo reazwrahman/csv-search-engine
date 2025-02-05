@@ -26,18 +26,14 @@ import java.util.regex.Pattern;
 public class Processor {
     int m_matchCount;
     int m_expectedLength = Configs.HEADERS.split(",").length;
-    Map<String, Tuple> m_searchHistory = new HashMap<>();
 
     // Search for a keyword in the output file
     public int search(String outputFile, String keyword, boolean isCaseSensitive) {
         m_matchCount = 0;
-        SearchHistory.insertRecord(keyword);
-
         processCsv(outputFile, keyword, isCaseSensitive);
         if (m_matchCount == 0) {
             System.out.println("No match found for: " + keyword);
         }
-        SearchHistory.printHistory();
         return m_matchCount;
     }
 
