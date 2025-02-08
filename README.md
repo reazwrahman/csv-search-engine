@@ -5,7 +5,10 @@ for specific keywords.
 
 Additionally, an in-memory map is implemented to store the frequency and the last time a keyword was searched.
 
-Video Demo YouTube link: https://www.youtube.com/watch?v=eYHxfFBRiv0
+Video Demo YouTube link Part 1: https://www.youtube.com/watch?v=QNO0AJfVxnQ 
+
+Part 2 (in-memory map): https://www.youtube.com/watch?v=eYHxfFBRiv0 
+
 
 ## How to run
 
