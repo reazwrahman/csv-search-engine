@@ -14,6 +14,7 @@ public class SearchHistoryTest {
 
     @Test
     public void testSearchHistory() {
+        assertDoesNotThrow(() -> new SearchHistory());
         Instant now = Instant.now();
         String keyword = "Test Search History";
         SearchHistory.insertRecord(keyword);
