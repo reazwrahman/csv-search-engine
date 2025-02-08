@@ -20,10 +20,10 @@ public class SearchHistory {
     public static void insertRecord(String keyword){
         int frequency = 1;
         if (m_searchHistory.containsKey(keyword)) {
-            frequency = (int) m_searchHistory.get(keyword).frequency + 1;
+            frequency = (Integer) m_searchHistory.get(keyword).frequency + 1;
         }
 
-        Tuple record = new Tuple(frequency, Instant.now());
+        Tuple<Integer, Instant> record = new Tuple<>(frequency, Instant.now());
         m_searchHistory.put(keyword, record);
     }
 

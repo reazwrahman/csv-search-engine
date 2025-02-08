@@ -28,7 +28,7 @@ public class SearchHistoryTest {
         Instant lastSearched = (Instant)SearchHistory.getSearchHistory().get(keyword).lastSearched;
         assert(lastSearched.isAfter(now));
 
-        assertDoesNotThrow(SearchHistory::printHistory);
+        assertDoesNotThrow(() -> SearchHistory.printHistory()); // example of lambda function usage
 
     }
 
