@@ -1,10 +1,12 @@
 import bu.cs622.csv.search.engine.Processor;
+import bu.cs622.csv.search.engine.utility.SearchHistory;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.nio.file.Paths;
+import java.time.Instant;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -70,5 +72,4 @@ public class ProcessorTest {
 
         assertEquals("OutputProcessor::checkLength invalid length for row, expected: 26 Found: 2 , data: [data1, data2]", thrown.getMessage());
     }
-
 }

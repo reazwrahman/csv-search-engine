@@ -1,12 +1,17 @@
 package bu.cs622.csv.search.engine;
 
 import bu.cs622.csv.search.engine.utility.Configs;
+import bu.cs622.csv.search.engine.utility.SearchHistory;
+import bu.cs622.csv.search.engine.utility.Tuple;
 import com.opencsv.CSVReader;
 import com.opencsv.exceptions.CsvException;
 
 import java.io.FileReader;
 import java.io.IOException;
+import java.time.Instant;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
